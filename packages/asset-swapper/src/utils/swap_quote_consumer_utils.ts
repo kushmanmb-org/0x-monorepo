@@ -94,8 +94,6 @@ export const swapQuoteConsumerUtils = {
             if (isEnoughEthAndWethBalance[1]) {
                 // should be more gas efficient to use exchange consumer, so if possible use it.
                 return ExtensionContractType.None;
-            } else if (isEnoughEthAndWethBalance[0] && !isEnoughEthAndWethBalance[1]) {
-                return ExtensionContractType.Forwarder;
             }
             // Note: defaulting to forwarderConsumer if takerAddress is null or not enough balance of either wEth or Eth
             return ExtensionContractType.Forwarder;

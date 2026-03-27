@@ -132,9 +132,12 @@ export class Path {
         const { input, output } = this._adjustedSize;
         const { exchangeProxyOverhead, ethToOutputRate, ethToInputRate } = this.pathPenaltyOpts;
         const gasOverhead = exchangeProxyOverhead(this.sourceFlags);
-        const pathPenalty = !ethToOutputRate.isZero()
-            ? ethToOutputRate.times(gasOverhead)
-            : ethToInputRate.times(gasOverhead).times(output.dividedToIntegerBy(input));
+        let pathPenalty = ZERO_AMOUNT;
+        if (!ethToOutputRate.isZero()) {
+            pathPenalty = ethToOutputRate.times(gasOverhead);
+        } else if (!input.isZero()) {
+            pathPenalty = ethToInputRate.times(gasOverhead).times(output.dividedToIntegerBy(input));
+        }
         return {
             input,
             output: this.side === MarketOperation.Sell ? output.minus(pathPenalty) : output.plus(pathPenalty),

@@ -88,9 +88,12 @@ function nativeOrdersToFills(
         const input = side === MarketOperation.Sell ? takerAmount : makerAmount;
         const output = side === MarketOperation.Sell ? makerAmount : takerAmount;
         const fee = fees[ERC20BridgeSource.Native] === undefined ? 0 : fees[ERC20BridgeSource.Native]!();
-        const outputPenalty = !ethToOutputRate.isZero()
-            ? ethToOutputRate.times(fee)
-            : ethToInputRate.times(fee).times(output.dividedToIntegerBy(input));
+        let outputPenalty = ZERO_AMOUNT;
+        if (!ethToOutputRate.isZero()) {
+            outputPenalty = ethToOutputRate.times(fee);
+        } else if (!input.isZero()) {
+            outputPenalty = ethToInputRate.times(fee).times(output.dividedToIntegerBy(input));
+        }
         // targetInput can be less than the order size
         // whilst the penalty is constant, it affects the adjusted output
         // only up until the target has been exhausted.
@@ -148,15 +151,17 @@ function dexSamplesToFills(
         const sample = nonzeroSamples[i];
         const prevSample = i === 0 ? undefined : nonzeroSamples[i - 1];
         const { source, fillData } = sample;
-        const input = sample.input.minus(prevSample ? prevSample.input : 0);
-        const output = sample.output.minus(prevSample ? prevSample.output : 0);
+        const input = sample.input.minus(prevSample ? prevSample.input : ZERO_AMOUNT);
+        const output = sample.output.minus(prevSample ? prevSample.output : ZERO_AMOUNT);
         const fee = fees[source] === undefined ? 0 : fees[source]!(sample.fillData);
         let penalty = ZERO_AMOUNT;
         if (i === 0) {
             // Only the first fill in a DEX path incurs a penalty.
-            penalty = !ethToOutputRate.isZero()
-                ? ethToOutputRate.times(fee)
-                : ethToInputRate.times(fee).times(output.dividedToIntegerBy(input));
+            if (!ethToOutputRate.isZero()) {
+                penalty = ethToOutputRate.times(fee);
+            } else if (!input.isZero()) {
+                penalty = ethToInputRate.times(fee).times(output.dividedToIntegerBy(input));
+            }
         }
         const adjustedOutput = side === MarketOperation.Sell ? output.minus(penalty) : output.plus(penalty);
 

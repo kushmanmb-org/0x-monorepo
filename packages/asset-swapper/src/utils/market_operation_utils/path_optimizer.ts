@@ -82,7 +82,7 @@ function mixPaths(
     });
     _walk(Path.create(side, [], targetInput, pathA.pathPenaltyOpts), sortedFills);
     if (!bestPath.isValid()) {
-        throw new Error('nooope');
+        throw new Error('No valid path found after optimization.');
     }
     return bestPath;
 }
