@@ -42,7 +42,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/0xProject/0x-monorepo"
+        "url": "https://github.com/Kushmanmb/0x-monorepo"
     },
     "license": "Apache-2.0",
     "devDependencies": {

@@ -55,7 +55,7 @@ export async function publishReleaseNotesAsync(
 
     const publishReleaseConfigs = {
         token: constants.githubPersonalAccessToken,
-        owner: '0xProject',
+        owner: 'Kushmanmb',
         tag: tagName,
         repo: '0x-monorepo',
         name: releaseName,

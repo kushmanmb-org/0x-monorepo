@@ -34,14 +34,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/0xProject/0x-monorepo.git"
+        "url": "https://github.com/Kushmanmb/0x-monorepo.git"
     },
     "author": "Francesco Agosti",
     "license": "Apache-2.0",
     "bugs": {
-        "url": "https://github.com/0xProject/0x-monorepo/issues"
+        "url": "https://github.com/Kushmanmb/0x-monorepo/issues"
     },
-    "homepage": "https://github.com/0xProject/0x-monorepo/packages/instant/README.md",
+    "homepage": "https://github.com/Kushmanmb/0x-monorepo/packages/instant/README.md",
     "dependencies": {
         "@0x/assert": "^3.0.9",
         "@0x/asset-swapper": "^4.6.0",
