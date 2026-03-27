@@ -44,6 +44,14 @@
         "0x-migrate": "bin/0x-migrate.js"
     },
     "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Kushmanmb/0x-monorepo.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Kushmanmb/0x-monorepo/issues"
+    },
+    "homepage": "https://github.com/Kushmanmb/0x-monorepo/packages/migrations/README.md",
     "gitpkg": {
         "registry": "git@github.com:0xProject/gitpkg-registry.git"
     },

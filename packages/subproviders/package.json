@@ -7,6 +7,14 @@
     "main": "lib/src/index.js",
     "types": "lib/src/index.d.ts",
     "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Kushmanmb/0x-monorepo.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Kushmanmb/0x-monorepo/issues"
+    },
+    "homepage": "https://github.com/Kushmanmb/0x-monorepo/packages/subproviders/README.md",
     "scripts": {
         "build": "tsc -b",
         "build:ci": "yarn build",
